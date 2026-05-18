@@ -1,0 +1,19 @@
+# Raw data can be rebuilt by running 01_download.ipynb
+data/stock/
+data/index/
+data/macro/
+data/finance/
+
+# Database files, if SQLite is added later
+*.db
+
+# Notebook/runtime cache
+.ipynb_checkpoints/
+__pycache__/
+
+# System files
+.DS_Store
+Thumbs.db
+
+/.quarto/
+**/*.quarto_ipynb

@@ -1,0 +1,5 @@
+﻿step,rows,note
+stock_clean,14905,清洗后的股票长表
+left_join_hs300,14905,按日期左连接沪深300，行数应保持不变
+left_join_zz500,14905,按日期左连接中证500，行数应保持不变
+left_join_macro,14905,按月份映射宏观指标，行数应保持不变

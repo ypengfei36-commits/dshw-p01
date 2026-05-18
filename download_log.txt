@@ -1,0 +1,24 @@
+[2026-05-18 13:51:24] SUCCESS stock_000001       shape=(1541, 10)
+[2026-05-18 13:51:25] SUCCESS stock_600036       shape=(1541, 10)
+[2026-05-18 13:51:26] SUCCESS stock_600519       shape=(1541, 10)
+[2026-05-18 13:51:27] SUCCESS stock_000858       shape=(1541, 10)
+[2026-05-18 13:51:28] SUCCESS stock_002594       shape=(1540, 10); provider=sina
+[2026-05-18 13:51:29] SUCCESS stock_601633       shape=(1540, 10); provider=sina
+[2026-05-18 13:51:30] SUCCESS stock_601857       shape=(1540, 10); provider=sina
+[2026-05-18 13:51:31] SUCCESS stock_600900       shape=(1529, 10); provider=sina
+[2026-05-18 13:51:33] SUCCESS stock_600941       shape=(1053, 10); provider=sina
+[2026-05-18 13:51:34] SUCCESS stock_000063       shape=(1539, 10); provider=sina
+[2026-05-18 13:51:35] SUCCESS index_000300       shape=(1540, 10); provider=sina
+[2026-05-18 13:51:36] SUCCESS index_000905       shape=(1540, 10); provider=sina
+[2026-05-18 13:51:41] SUCCESS macro_cpi          shape=(68, 4)
+[2026-05-18 13:51:45] SUCCESS macro_m2           shape=(74, 4)
+[2026-05-18 13:51:47] SUCCESS finance_000001     shape=(10, 7)
+[2026-05-18 13:51:50] SUCCESS finance_600036     shape=(10, 7)
+[2026-05-18 13:51:52] SUCCESS finance_600519     shape=(10, 7)
+[2026-05-18 13:51:55] SUCCESS finance_000858     shape=(10, 7)
+[2026-05-18 13:51:57] SUCCESS finance_002594     shape=(10, 7)
+[2026-05-18 13:52:00] SUCCESS finance_601633     shape=(10, 7)
+[2026-05-18 13:52:03] SUCCESS finance_601857     shape=(10, 7)
+[2026-05-18 13:52:06] SUCCESS finance_600900     shape=(10, 7)
+[2026-05-18 13:52:08] SUCCESS finance_600941     shape=(10, 7)
+[2026-05-18 13:52:11] SUCCESS finance_000063     shape=(10, 7)

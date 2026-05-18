@@ -1,0 +1,42 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "P01 金融数据获取、管理与初步分析",
+    "section": "",
+    "text": "1 项目概览\n本电子书整理 P01 金融数据作业的主要流程和结论。完整代码见三个 Notebook，独立分析报告见 report.html。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>项目概览</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#数据与方法",
+    "href": "index.html#数据与方法",
+    "title": "P01 金融数据获取、管理与初步分析",
+    "section": "1.1 数据与方法",
+    "text": "1.1 数据与方法\n\n数据范围：2020-01-01 至运行当日。\n个股范围：10 只 A 股，覆盖银行、白酒、汽车、能源、通讯 5 个行业。\n市场基准：沪深 300。\n宏观变量：CPI 同比增速、M2 同比增速。\n存储方式：CSV 作为基础格式，Parquet 作为进阶格式。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>项目概览</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#关键输出",
+    "href": "index.html#关键输出",
+    "title": "P01 金融数据获取、管理与初步分析",
+    "section": "1.2 关键输出",
+    "text": "1.2 关键输出\n统计表、图形和回归结果由 03_analysis.ipynb 生成，图形统一保存到 output/。",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>项目概览</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#运行顺序",
+    "href": "index.html#运行顺序",
+    "title": "P01 金融数据获取、管理与初步分析",
+    "section": "1.3 运行顺序",
+    "text": "1.3 运行顺序\npip install -r requirements.txt\njupyter notebook 01_download.ipynb\njupyter notebook 02_clean.ipynb\njupyter notebook 03_analysis.ipynb\npython -m nbconvert --to html 03_analysis.ipynb --output report.html\nquarto render",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>项目概览</span>"
+    ]
+  }
+]

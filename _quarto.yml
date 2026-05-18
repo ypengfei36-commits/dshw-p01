@@ -1,0 +1,19 @@
+project:
+  type: book
+  output-dir: docs
+  resources:
+    - report.html
+    - output/
+
+book:
+  title: "P01 金融数据获取、管理与初步分析"
+  author: "杨鹏飞"
+  chapters:
+    - index.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    self-contained: false
