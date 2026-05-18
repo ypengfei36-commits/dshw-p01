@@ -10,6 +10,10 @@ book:
   author: "杨鹏飞"
   chapters:
     - index.qmd
+    - data.qmd
+    - cleaning-storage.qmd
+    - analysis.qmd
+    - capm-conclusion.qmd
 
 format:
   html:

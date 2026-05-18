@@ -4,17 +4,17 @@
     "href": "index.html",
     "title": "P01 金融数据获取、管理与初步分析",
     "section": "",
-    "text": "1 项目概览\n本电子书整理 P01 金融数据作业的主要流程和结论。完整代码见三个 Notebook，独立分析报告见 report.html。",
+    "text": "1 项目概览\n本电子书是 P01 金融数据作业的在线版本，内容与根目录下的 report.html 保持一致，并补充数据获取、清洗、存储和回归解释。项目选取 10 只 A 股，覆盖银行、白酒、汽车、能源、通讯 5 个行业；市场基准为沪深 300，补充指数为中证 500，宏观变量为 CPI 同比增速和 M2 同比增速。\n本项目的核心结论是：2020 年以来样本股票表现高度分化，比亚迪收益最高但波动较大，长江电力和中国移动回撤较小、防御属性更强；白酒内部贵州茅台显著强于五粮液，银行内部招商银行强于平安银行。CAPM 结果显示，高 Beta 股票主要集中在比亚迪、中兴通讯、长城汽车和五粮液，低 Beta 股票集中在长江电力、中国移动和中国石油，但 5% 显著性水平下没有股票获得稳定 Alpha。",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>项目概览</span>"
     ]
   },
   {
-    "objectID": "index.html#数据与方法",
-    "href": "index.html#数据与方法",
+    "objectID": "index.html#股票与行业",
+    "href": "index.html#股票与行业",
     "title": "P01 金融数据获取、管理与初步分析",
-    "section": "1.1 数据与方法",
-    "text": "1.1 数据与方法\n\n数据范围：2020-01-01 至运行当日。\n个股范围：10 只 A 股，覆盖银行、白酒、汽车、能源、通讯 5 个行业。\n市场基准：沪深 300。\n宏观变量：CPI 同比增速、M2 同比增速。\n存储方式：CSV 作为基础格式，Parquet 作为进阶格式。",
+    "section": "1.1 股票与行业",
+    "text": "1.1 股票与行业\n\n\n\n行业\n股票\n\n\n\n\n银行\n平安银行、招商银行\n\n\n白酒\n贵州茅台、五粮液\n\n\n汽车\n比亚迪、长城汽车\n\n\n能源\n中国石油、长江电力\n\n\n通讯\n中国移动、中兴通讯",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>项目概览</span>"
     ]
@@ -24,19 +24,139 @@
     "href": "index.html#关键输出",
     "title": "P01 金融数据获取、管理与初步分析",
     "section": "1.2 关键输出",
-    "text": "1.2 关键输出\n统计表、图形和回归结果由 03_analysis.ipynb 生成，图形统一保存到 output/。",
+    "text": "1.2 关键输出\n\n独立报告：report.html\n描述统计：output/descriptive_stats.csv\nCAPM 回归：output/capm_results.csv\n图表文件：output/fig1_normalized_prices.png 至 output/fig6_capm_beta.png",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>项目概览</span>"
     ]
   },
   {
-    "objectID": "index.html#运行顺序",
-    "href": "index.html#运行顺序",
-    "title": "P01 金融数据获取、管理与初步分析",
-    "section": "1.3 运行顺序",
-    "text": "1.3 运行顺序\npip install -r requirements.txt\njupyter notebook 01_download.ipynb\njupyter notebook 02_clean.ipynb\njupyter notebook 03_analysis.ipynb\npython -m nbconvert --to html 03_analysis.ipynb --output report.html\nquarto render",
+    "objectID": "data.html",
+    "href": "data.html",
+    "title": "2  数据获取",
+    "section": "",
+    "text": "2.1 数据结构\n数据范围为 2020-01-01 至运行当日。股票行情使用后复权日度数据，指数包括沪深 300 和中证 500，宏观指标包括 CPI 同比增速和 M2 同比增速，财务指标包括最近 5 年的 ROE 和资产负债率。下载日志 download_log.txt 显示最后一批任务均为 SUCCESS，股票和指数行情主要来自东方财富或新浪备用源，宏观和财务数据来自 AkShare 接口。\n本项目将数据分为四类原始目录：data/stock/、data/index/、data/macro/、data/finance/。清洗后的股票长表保存为 data/clean/stock_clean.csv，合并后的分析主表保存为 data/combined/combined_data.csv。财务数据整理成长表，字段包括 code, name, industry, year, indicator, value, source，便于后续按公司、年份和指标筛选。",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>项目概览</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>数据获取</span>"
+    ]
+  },
+  {
+    "objectID": "data.html#数据覆盖",
+    "href": "data.html#数据覆盖",
+    "title": "2  数据获取",
+    "section": "2.2 数据覆盖",
+    "text": "2.2 数据覆盖\n清洗后股票长表共有 14905 行。大多数股票覆盖约 1540 个交易日，中国移动由于上市时间较晚，样本行数为 1053 行。合并审计结果显示，连接沪深 300、中证 500 和宏观指标后行数保持为 14905 行，说明合并过程没有意外丢失个股记录。",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>数据获取</span>"
+    ]
+  },
+  {
+    "objectID": "cleaning-storage.html",
+    "href": "cleaning-storage.html",
+    "title": "3  清洗与存储",
+    "section": "",
+    "text": "3.1 CSV 与 Parquet 对比\n清洗流程包括日期统一、字段类型转换、重复值删除、缺失值检查、收益率计算和极端收益标注。clean_audit.csv 显示 10 只股票均未删除重复记录，极端收益标注数量为 0，说明当前样本在设定阈值下没有需要单独剔除的异常收益记录。\n项目主体分析使用 CSV，便于检查和提交；同时额外保存 data/clean/stock_clean.parquet 作为进阶存储格式。当前测试结果显示，CSV 文件约 1831 KB，Parquet 文件约 712 KB；CSV 读取约 0.053 秒，Parquet 读取约 0.004 秒。对于本作业规模，两者都能满足分析需要，但 Parquet 在文件体积、类型保留和列式读取方面更适合后续扩展。",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>清洗与存储</span>"
+    ]
+  },
+  {
+    "objectID": "cleaning-storage.html#csv-与-parquet-对比",
+    "href": "cleaning-storage.html#csv-与-parquet-对比",
+    "title": "3  清洗与存储",
+    "section": "",
+    "text": "格式\n读取时间\n文件大小\n\n\n\n\nCSV\n约 0.053 秒\n约 1831 KB\n\n\nParquet\n约 0.004 秒\n约 712 KB",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>清洗与存储</span>"
+    ]
+  },
+  {
+    "objectID": "cleaning-storage.html#合并结果",
+    "href": "cleaning-storage.html#合并结果",
+    "title": "3  清洗与存储",
+    "section": "3.2 合并结果",
+    "text": "3.2 合并结果\n合并后的 combined_data.csv 保留股票日度收益、沪深 300 和中证 500 收益、CPI 与 M2 等字段。CAPM 回归使用沪深 300 日收益率作为市场组合收益，宏观分析使用月度重采样后的沪深 300 收益与 CPI/M2 进行相关性比较。",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>清洗与存储</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html",
+    "href": "analysis.html",
+    "title": "4  描述统计与可视化",
+    "section": "",
+    "text": "4.1 归一化价格走势\n统计表显示，10 只股票的收益风险差异非常明显。比亚迪年化均值最高，达到 29.82%，但年化波动率也高达 43.11%，属于高收益、高波动的成长型样本；中国移动、中国石油和长城汽车的年化均值也较高，分别约为 17.20%、15.79% 和 13.47%。平安银行和五粮液的年化均值为负，说明样本期内价格修复不足。\n最大回撤方面，长城汽车、五粮液、中兴通讯和平安银行分别出现约 -70.61%、-66.62%、-61.87% 和 -59.38% 的深度回撤，而长江电力和中国移动的最大回撤仅约 -17.54% 和 -19.20%，防御属性更强。\n图 1 可以看出，样本期内个股走势明显分化。比亚迪的归一化收盘价最终约为起点的 6.18 倍，是 10 只股票中表现最突出的样本；中国石油、长城汽车、中国移动和长江电力最终分别约为起点的 2.62 倍、2.28 倍、2.05 倍和 1.80 倍，明显强于沪深 300 约 1.17 倍的同期表现。相反，五粮液和平安银行期末仍低于起点，分别约为 0.85 倍和 0.80 倍。",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>描述统计与可视化</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html#收益率分布",
+    "href": "analysis.html#收益率分布",
+    "title": "4  描述统计与可视化",
+    "section": "4.2 收益率分布",
+    "text": "4.2 收益率分布\n\n图 2 与描述性统计共同说明，10 只股票的日收益率并不完全符合简单正态分布。所有股票偏度均为正，其中中国移动偏度约 0.61、长城汽车约 0.46；峰度方面，中国石油、中国移动和平安银行分别约为 5.08、5.04 和 4.59，高于正态分布基准，体现出尖峰厚尾特征。",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>描述统计与可视化</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html#相关系数热力图",
+    "href": "analysis.html#相关系数热力图",
+    "title": "4  描述统计与可视化",
+    "section": "4.3 相关系数热力图",
+    "text": "4.3 相关系数热力图\n\n图 3 显示行业内相关性具有明显差异。白酒组合五粮液与贵州茅台的相关系数约为 0.83，是样本中最高的一组；银行组合平安银行与招商银行约为 0.78，也体现出较强行业共振。汽车组合比亚迪与长城汽车约为 0.59，通信组内部的中国移动与中兴通讯相关性较弱，说明行业标签之外，公司商业模式和市场风格也会影响收益同步性。",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>描述统计与可视化</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html#宏观变量关系",
+    "href": "analysis.html#宏观变量关系",
+    "title": "4  描述统计与可视化",
+    "section": "4.4 宏观变量关系",
+    "text": "4.4 宏观变量关系\n\n图 4 中 CPI 同比增速与沪深 300 月度收益率的 Pearson 相关系数约为 -0.05，M2 同比增速与沪深 300 月度收益率的相关系数也约为 -0.05，均接近 0。这说明在 2020 年以来的样本中，单独使用 CPI 或 M2 难以解释沪深 300 的短期月度收益变化。",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>描述统计与可视化</span>"
+    ]
+  },
+  {
+    "objectID": "analysis.html#roe-对比",
+    "href": "analysis.html#roe-对比",
+    "title": "4  描述统计与可视化",
+    "section": "4.5 ROE 对比",
+    "text": "4.5 ROE 对比\n\n图 5 显示，贵州茅台最近 5 年平均 ROE 约 32.94%，2025 年仍有 33.65%，盈利能力最突出。五粮液 5 年平均 ROE 约 20.34%，但 2025 年降至 7.47%，与其股价表现承压相互印证。银行中招商银行平均 ROE 约 13.22%，高于平安银行的 9.46%；能源中长江电力平均 ROE 约 14.11%，且 2025 年达到 15.59%，与其较低波动和较小回撤形成一致的稳健特征。",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>描述统计与可视化</span>"
+    ]
+  },
+  {
+    "objectID": "capm-conclusion.html",
+    "href": "capm-conclusion.html",
+    "title": "5  CAPM 回归与结论",
+    "section": "",
+    "text": "5.1 系统性风险\nCAPM 回归设定无风险利率为年化 2%，换算为日度 0.02 / 252，市场组合使用沪深 300 日收益率。回归输出包括 Alpha、Beta、Alpha 的 p 值、Beta 的 95% 置信区间和 R²。\nBeta 大于 1 的股票包括比亚迪、中兴通讯、长城汽车和五粮液。其中比亚迪 Beta 约 1.27，中兴通讯约 1.25，长城汽车约 1.18，五粮液约 1.17，说明这些股票对沪深 300 的市场波动更敏感。Beta 低于 0.5 的股票包括长江电力、中国移动和中国石油，分别约为 0.22、0.30 和 0.45，更接近防御或高股息资产特征。",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>CAPM 回归与结论</span>"
+    ]
+  },
+  {
+    "objectID": "capm-conclusion.html#alpha-与解释力",
+    "href": "capm-conclusion.html#alpha-与解释力",
+    "title": "5  CAPM 回归与结论",
+    "section": "5.2 Alpha 与解释力",
+    "text": "5.2 Alpha 与解释力\n在 5% 显著性水平下，没有股票的 Alpha 显著异于 0，说明控制沪深 300 市场风险后，本样本未发现稳定、统计显著的日均超额收益。如果放宽到 10% 水平，比亚迪的 Alpha 接近显著，p 值约为 0.062，但这仍不能作为确定性超额收益结论。\nR² 最高的是五粮液，约 48.41%，贵州茅台约 43.16%，银行样本也在 36% 至 37% 左右，说明这些股票收益中有较大比例可由市场因子解释。R² 最低的是中国移动，约 4.54%；长江电力、中国石油等低 Beta 股票的 R² 也偏低，说明其收益更多受到公司特质、股息预期、能源价格或行业监管等非市场单因子影响。",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>CAPM 回归与结论</span>"
+    ]
+  },
+  {
+    "objectID": "capm-conclusion.html#最终结论",
+    "href": "capm-conclusion.html#最终结论",
+    "title": "5  CAPM 回归与结论",
+    "section": "5.3 最终结论",
+    "text": "5.3 最终结论\n本项目完成了从数据获取、清洗、存储、合并到统计分析和 CAPM 回归的完整流程。结果显示，10 只股票并不是简单随市场同涨同跌，而是在收益、波动、最大回撤、ROE 和 Beta 暴露上呈现明显分层。比亚迪代表高成长、高波动样本；长江电力和中国移动更偏防御；贵州茅台体现高 ROE 和较强股价韧性；五粮液和平安银行在样本期内表现承压。\nCAPM 适合比较不同股票的系统性风险暴露，但对低 Beta、高股息或强公司特质股票的解释力有限。实际投资分析需要把市场风险因子、行业周期、公司盈利能力和宏观环境结合起来，而不能只依赖单一回归模型。",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>CAPM 回归与结论</span>"
     ]
   }
 ]

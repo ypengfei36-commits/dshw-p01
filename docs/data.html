@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="杨鹏飞">
 
-<title>P01 金融数据获取、管理与初步分析</title>
+<title>2&nbsp; 数据获取 – P01 金融数据获取、管理与初步分析</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -34,7 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./data.html" rel="next">
+<link href="./cleaning-storage.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -85,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">项目概览</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">数据获取</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -112,13 +112,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">项目概览</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./data.html" class="sidebar-item-text sidebar-link">
+  <a href="./data.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">数据获取</span></span></a>
   </div>
 </li>
@@ -150,11 +150,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#项目概览" id="toc-项目概览" class="nav-link active" data-scroll-target="#项目概览"><span class="header-section-number">1</span> 项目概览</a>
-  <ul class="collapse">
-  <li><a href="#股票与行业" id="toc-股票与行业" class="nav-link" data-scroll-target="#股票与行业"><span class="header-section-number">1.1</span> 股票与行业</a></li>
-  <li><a href="#关键输出" id="toc-关键输出" class="nav-link" data-scroll-target="#关键输出"><span class="header-section-number">1.2</span> 关键输出</a></li>
-  </ul></li>
+  <li><a href="#数据结构" id="toc-数据结构" class="nav-link active" data-scroll-target="#数据结构"><span class="header-section-number">2.1</span> 数据结构</a></li>
+  <li><a href="#数据覆盖" id="toc-数据覆盖" class="nav-link" data-scroll-target="#数据覆盖"><span class="header-section-number">2.2</span> 数据覆盖</a></li>
   </ul>
 </nav>
     </div>
@@ -163,19 +160,13 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">P01 金融数据获取、管理与初步分析</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">数据获取</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>杨鹏飞 </p>
-          </div>
-  </div>
     
   
     
@@ -186,55 +177,16 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="项目概览" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> 项目概览</h1>
-<p>本电子书是 P01 金融数据作业的在线版本，内容与根目录下的 <a href="report.html"><code>report.html</code></a> 保持一致，并补充数据获取、清洗、存储和回归解释。项目选取 10 只 A 股，覆盖银行、白酒、汽车、能源、通讯 5 个行业；市场基准为沪深 300，补充指数为中证 500，宏观变量为 CPI 同比增速和 M2 同比增速。</p>
-<p>本项目的核心结论是：2020 年以来样本股票表现高度分化，比亚迪收益最高但波动较大，长江电力和中国移动回撤较小、防御属性更强；白酒内部贵州茅台显著强于五粮液，银行内部招商银行强于平安银行。CAPM 结果显示，高 Beta 股票主要集中在比亚迪、中兴通讯、长城汽车和五粮液，低 Beta 股票集中在长江电力、中国移动和中国石油，但 5% 显著性水平下没有股票获得稳定 Alpha。</p>
-<section id="股票与行业" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="股票与行业"><span class="header-section-number">1.1</span> 股票与行业</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>行业</th>
-<th>股票</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>银行</td>
-<td>平安银行、招商银行</td>
-</tr>
-<tr class="even">
-<td>白酒</td>
-<td>贵州茅台、五粮液</td>
-</tr>
-<tr class="odd">
-<td>汽车</td>
-<td>比亚迪、长城汽车</td>
-</tr>
-<tr class="even">
-<td>能源</td>
-<td>中国石油、长江电力</td>
-</tr>
-<tr class="odd">
-<td>通讯</td>
-<td>中国移动、中兴通讯</td>
-</tr>
-</tbody>
-</table>
+<p>数据范围为 2020-01-01 至运行当日。股票行情使用后复权日度数据，指数包括沪深 300 和中证 500，宏观指标包括 CPI 同比增速和 M2 同比增速，财务指标包括最近 5 年的 ROE 和资产负债率。下载日志 <code>download_log.txt</code> 显示最后一批任务均为 <code>SUCCESS</code>，股票和指数行情主要来自东方财富或新浪备用源，宏观和财务数据来自 AkShare 接口。</p>
+<section id="数据结构" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="数据结构"><span class="header-section-number">2.1</span> 数据结构</h2>
+<p>本项目将数据分为四类原始目录：<code>data/stock/</code>、<code>data/index/</code>、<code>data/macro/</code>、<code>data/finance/</code>。清洗后的股票长表保存为 <code>data/clean/stock_clean.csv</code>，合并后的分析主表保存为 <code>data/combined/combined_data.csv</code>。财务数据整理成长表，字段包括 <code>code, name, industry, year, indicator, value, source</code>，便于后续按公司、年份和指标筛选。</p>
 </section>
-<section id="关键输出" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="关键输出"><span class="header-section-number">1.2</span> 关键输出</h2>
-<ul>
-<li>独立报告：<a href="report.html"><code>report.html</code></a></li>
-<li>描述统计：<code>output/descriptive_stats.csv</code></li>
-<li>CAPM 回归：<code>output/capm_results.csv</code></li>
-<li>图表文件：<code>output/fig1_normalized_prices.png</code> 至 <code>output/fig6_capm_beta.png</code></li>
-</ul>
-<p><img src="output/fig1_normalized_prices.png" class="img-fluid"></p>
+<section id="数据覆盖" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="数据覆盖"><span class="header-section-number">2.2</span> 数据覆盖</h2>
+<p>清洗后股票长表共有 14905 行。大多数股票覆盖约 1540 个交易日，中国移动由于上市时间较晚，样本行数为 1053 行。合并审计结果显示，连接沪深 300、中证 500 和宏观指标后行数保持为 14905 行，说明合并过程没有意外丢失个股记录。</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -640,10 +592,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="项目概览">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">项目概览</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data.html" class="pagination-link" aria-label="数据获取">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">数据获取</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./cleaning-storage.html" class="pagination-link" aria-label="清洗与存储">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">清洗与存储</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

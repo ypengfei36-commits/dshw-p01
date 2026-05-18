@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="杨鹏飞">
 
-<title>P01 金融数据获取、管理与初步分析</title>
+<title>4&nbsp; 描述统计与可视化 – P01 金融数据获取、管理与初步分析</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -34,7 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./data.html" rel="next">
+<link href="./capm-conclusion.html" rel="next">
+<link href="./cleaning-storage.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -85,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">项目概览</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./analysis.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">描述统计与可视化</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -112,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">项目概览</span></span></a>
   </div>
 </li>
@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./analysis.html" class="sidebar-item-text sidebar-link">
+  <a href="./analysis.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">描述统计与可视化</span></span></a>
   </div>
 </li>
@@ -150,11 +150,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#项目概览" id="toc-项目概览" class="nav-link active" data-scroll-target="#项目概览"><span class="header-section-number">1</span> 项目概览</a>
-  <ul class="collapse">
-  <li><a href="#股票与行业" id="toc-股票与行业" class="nav-link" data-scroll-target="#股票与行业"><span class="header-section-number">1.1</span> 股票与行业</a></li>
-  <li><a href="#关键输出" id="toc-关键输出" class="nav-link" data-scroll-target="#关键输出"><span class="header-section-number">1.2</span> 关键输出</a></li>
-  </ul></li>
+  <li><a href="#归一化价格走势" id="toc-归一化价格走势" class="nav-link active" data-scroll-target="#归一化价格走势"><span class="header-section-number">4.1</span> 归一化价格走势</a></li>
+  <li><a href="#收益率分布" id="toc-收益率分布" class="nav-link" data-scroll-target="#收益率分布"><span class="header-section-number">4.2</span> 收益率分布</a></li>
+  <li><a href="#相关系数热力图" id="toc-相关系数热力图" class="nav-link" data-scroll-target="#相关系数热力图"><span class="header-section-number">4.3</span> 相关系数热力图</a></li>
+  <li><a href="#宏观变量关系" id="toc-宏观变量关系" class="nav-link" data-scroll-target="#宏观变量关系"><span class="header-section-number">4.4</span> 宏观变量关系</a></li>
+  <li><a href="#roe-对比" id="toc-roe-对比" class="nav-link" data-scroll-target="#roe-对比"><span class="header-section-number">4.5</span> ROE 对比</a></li>
   </ul>
 </nav>
     </div>
@@ -163,19 +163,13 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">P01 金融数据获取、管理与初步分析</h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">描述统计与可视化</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>杨鹏飞 </p>
-          </div>
-  </div>
     
   
     
@@ -186,55 +180,34 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="项目概览" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> 项目概览</h1>
-<p>本电子书是 P01 金融数据作业的在线版本，内容与根目录下的 <a href="report.html"><code>report.html</code></a> 保持一致，并补充数据获取、清洗、存储和回归解释。项目选取 10 只 A 股，覆盖银行、白酒、汽车、能源、通讯 5 个行业；市场基准为沪深 300，补充指数为中证 500，宏观变量为 CPI 同比增速和 M2 同比增速。</p>
-<p>本项目的核心结论是：2020 年以来样本股票表现高度分化，比亚迪收益最高但波动较大，长江电力和中国移动回撤较小、防御属性更强；白酒内部贵州茅台显著强于五粮液，银行内部招商银行强于平安银行。CAPM 结果显示，高 Beta 股票主要集中在比亚迪、中兴通讯、长城汽车和五粮液，低 Beta 股票集中在长江电力、中国移动和中国石油，但 5% 显著性水平下没有股票获得稳定 Alpha。</p>
-<section id="股票与行业" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="股票与行业"><span class="header-section-number">1.1</span> 股票与行业</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>行业</th>
-<th>股票</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>银行</td>
-<td>平安银行、招商银行</td>
-</tr>
-<tr class="even">
-<td>白酒</td>
-<td>贵州茅台、五粮液</td>
-</tr>
-<tr class="odd">
-<td>汽车</td>
-<td>比亚迪、长城汽车</td>
-</tr>
-<tr class="even">
-<td>能源</td>
-<td>中国石油、长江电力</td>
-</tr>
-<tr class="odd">
-<td>通讯</td>
-<td>中国移动、中兴通讯</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="关键输出" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="关键输出"><span class="header-section-number">1.2</span> 关键输出</h2>
-<ul>
-<li>独立报告：<a href="report.html"><code>report.html</code></a></li>
-<li>描述统计：<code>output/descriptive_stats.csv</code></li>
-<li>CAPM 回归：<code>output/capm_results.csv</code></li>
-<li>图表文件：<code>output/fig1_normalized_prices.png</code> 至 <code>output/fig6_capm_beta.png</code></li>
-</ul>
+<p>统计表显示，10 只股票的收益风险差异非常明显。比亚迪年化均值最高，达到 29.82%，但年化波动率也高达 43.11%，属于高收益、高波动的成长型样本；中国移动、中国石油和长城汽车的年化均值也较高，分别约为 17.20%、15.79% 和 13.47%。平安银行和五粮液的年化均值为负，说明样本期内价格修复不足。</p>
+<p>最大回撤方面，长城汽车、五粮液、中兴通讯和平安银行分别出现约 -70.61%、-66.62%、-61.87% 和 -59.38% 的深度回撤，而长江电力和中国移动的最大回撤仅约 -17.54% 和 -19.20%，防御属性更强。</p>
+<section id="归一化价格走势" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="归一化价格走势"><span class="header-section-number">4.1</span> 归一化价格走势</h2>
 <p><img src="output/fig1_normalized_prices.png" class="img-fluid"></p>
-
-
+<p>图 1 可以看出，样本期内个股走势明显分化。比亚迪的归一化收盘价最终约为起点的 6.18 倍，是 10 只股票中表现最突出的样本；中国石油、长城汽车、中国移动和长江电力最终分别约为起点的 2.62 倍、2.28 倍、2.05 倍和 1.80 倍，明显强于沪深 300 约 1.17 倍的同期表现。相反，五粮液和平安银行期末仍低于起点，分别约为 0.85 倍和 0.80 倍。</p>
 </section>
+<section id="收益率分布" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="收益率分布"><span class="header-section-number">4.2</span> 收益率分布</h2>
+<p><img src="output/fig2_return_distribution.png" class="img-fluid"></p>
+<p>图 2 与描述性统计共同说明，10 只股票的日收益率并不完全符合简单正态分布。所有股票偏度均为正，其中中国移动偏度约 0.61、长城汽车约 0.46；峰度方面，中国石油、中国移动和平安银行分别约为 5.08、5.04 和 4.59，高于正态分布基准，体现出尖峰厚尾特征。</p>
+</section>
+<section id="相关系数热力图" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="相关系数热力图"><span class="header-section-number">4.3</span> 相关系数热力图</h2>
+<p><img src="output/fig3_return_correlation_heatmap.png" class="img-fluid"></p>
+<p>图 3 显示行业内相关性具有明显差异。白酒组合五粮液与贵州茅台的相关系数约为 0.83，是样本中最高的一组；银行组合平安银行与招商银行约为 0.78，也体现出较强行业共振。汽车组合比亚迪与长城汽车约为 0.59，通信组内部的中国移动与中兴通讯相关性较弱，说明行业标签之外，公司商业模式和市场风格也会影响收益同步性。</p>
+</section>
+<section id="宏观变量关系" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="宏观变量关系"><span class="header-section-number">4.4</span> 宏观变量关系</h2>
+<p><img src="output/fig4_macro_cpi_vs_hs300.png" class="img-fluid"></p>
+<p>图 4 中 CPI 同比增速与沪深 300 月度收益率的 Pearson 相关系数约为 -0.05，M2 同比增速与沪深 300 月度收益率的相关系数也约为 -0.05，均接近 0。这说明在 2020 年以来的样本中，单独使用 CPI 或 M2 难以解释沪深 300 的短期月度收益变化。</p>
+</section>
+<section id="roe-对比" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="roe-对比"><span class="header-section-number">4.5</span> ROE 对比</h2>
+<p><img src="output/fig5_roe_comparison.png" class="img-fluid"></p>
+<p>图 5 显示，贵州茅台最近 5 年平均 ROE 约 32.94%，2025 年仍有 33.65%，盈利能力最突出。五粮液 5 年平均 ROE 约 20.34%，但 2025 年降至 7.47%，与其股价表现承压相互印证。银行中招商银行平均 ROE 约 13.22%，高于平安银行的 9.46%；能源中长江电力平均 ROE 约 14.11%，且 2025 年达到 15.59%，与其较低波动和较小回撤形成一致的稳健特征。</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -640,10 +613,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./cleaning-storage.html" class="pagination-link" aria-label="清洗与存储">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">清洗与存储</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data.html" class="pagination-link" aria-label="数据获取">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">数据获取</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./capm-conclusion.html" class="pagination-link" aria-label="CAPM 回归与结论">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CAPM 回归与结论</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

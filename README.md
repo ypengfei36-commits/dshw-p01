@@ -34,13 +34,9 @@
 
 ## GitHub 仓库
 
-请在个人 GitHub 下创建公开仓库并替换为你的实际链接：
-
 `https://github.com/ypengfei36-commits/dshw-p01`
 
 ## Quarto 电子书
-
-完成 GitHub Pages 发布后，将链接替换为：
 
 `https://ypengfei36-commits.github.io/dshw-p01/`
 

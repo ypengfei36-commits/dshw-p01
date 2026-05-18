@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="杨鹏飞">
 
-<title>P01 金融数据获取、管理与初步分析</title>
+<title>5&nbsp; CAPM 回归与结论 – P01 金融数据获取、管理与初步分析</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -34,7 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./data.html" rel="next">
+<link href="./analysis.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -85,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">项目概览</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./capm-conclusion.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CAPM 回归与结论</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -112,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">项目概览</span></span></a>
   </div>
 </li>
@@ -136,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./capm-conclusion.html" class="sidebar-item-text sidebar-link">
+  <a href="./capm-conclusion.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CAPM 回归与结论</span></span></a>
   </div>
 </li>
@@ -150,11 +149,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#项目概览" id="toc-项目概览" class="nav-link active" data-scroll-target="#项目概览"><span class="header-section-number">1</span> 项目概览</a>
-  <ul class="collapse">
-  <li><a href="#股票与行业" id="toc-股票与行业" class="nav-link" data-scroll-target="#股票与行业"><span class="header-section-number">1.1</span> 股票与行业</a></li>
-  <li><a href="#关键输出" id="toc-关键输出" class="nav-link" data-scroll-target="#关键输出"><span class="header-section-number">1.2</span> 关键输出</a></li>
-  </ul></li>
+  <li><a href="#系统性风险" id="toc-系统性风险" class="nav-link active" data-scroll-target="#系统性风险"><span class="header-section-number">5.1</span> 系统性风险</a></li>
+  <li><a href="#alpha-与解释力" id="toc-alpha-与解释力" class="nav-link" data-scroll-target="#alpha-与解释力"><span class="header-section-number">5.2</span> Alpha 与解释力</a></li>
+  <li><a href="#最终结论" id="toc-最终结论" class="nav-link" data-scroll-target="#最终结论"><span class="header-section-number">5.3</span> 最终结论</a></li>
   </ul>
 </nav>
     </div>
@@ -163,19 +160,13 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">P01 金融数据获取、管理与初步分析</h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">CAPM 回归与结论</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>杨鹏飞 </p>
-          </div>
-  </div>
     
   
     
@@ -186,55 +177,23 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="项目概览" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> 项目概览</h1>
-<p>本电子书是 P01 金融数据作业的在线版本，内容与根目录下的 <a href="report.html"><code>report.html</code></a> 保持一致，并补充数据获取、清洗、存储和回归解释。项目选取 10 只 A 股，覆盖银行、白酒、汽车、能源、通讯 5 个行业；市场基准为沪深 300，补充指数为中证 500，宏观变量为 CPI 同比增速和 M2 同比增速。</p>
-<p>本项目的核心结论是：2020 年以来样本股票表现高度分化，比亚迪收益最高但波动较大，长江电力和中国移动回撤较小、防御属性更强；白酒内部贵州茅台显著强于五粮液，银行内部招商银行强于平安银行。CAPM 结果显示，高 Beta 股票主要集中在比亚迪、中兴通讯、长城汽车和五粮液，低 Beta 股票集中在长江电力、中国移动和中国石油，但 5% 显著性水平下没有股票获得稳定 Alpha。</p>
-<section id="股票与行业" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="股票与行业"><span class="header-section-number">1.1</span> 股票与行业</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>行业</th>
-<th>股票</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>银行</td>
-<td>平安银行、招商银行</td>
-</tr>
-<tr class="even">
-<td>白酒</td>
-<td>贵州茅台、五粮液</td>
-</tr>
-<tr class="odd">
-<td>汽车</td>
-<td>比亚迪、长城汽车</td>
-</tr>
-<tr class="even">
-<td>能源</td>
-<td>中国石油、长江电力</td>
-</tr>
-<tr class="odd">
-<td>通讯</td>
-<td>中国移动、中兴通讯</td>
-</tr>
-</tbody>
-</table>
+<p>CAPM 回归设定无风险利率为年化 2%，换算为日度 <code>0.02 / 252</code>，市场组合使用沪深 300 日收益率。回归输出包括 Alpha、Beta、Alpha 的 p 值、Beta 的 95% 置信区间和 R²。</p>
+<p><img src="output/fig6_capm_beta.png" class="img-fluid"></p>
+<section id="系统性风险" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="系统性风险"><span class="header-section-number">5.1</span> 系统性风险</h2>
+<p>Beta 大于 1 的股票包括比亚迪、中兴通讯、长城汽车和五粮液。其中比亚迪 Beta 约 1.27，中兴通讯约 1.25，长城汽车约 1.18，五粮液约 1.17，说明这些股票对沪深 300 的市场波动更敏感。Beta 低于 0.5 的股票包括长江电力、中国移动和中国石油，分别约为 0.22、0.30 和 0.45，更接近防御或高股息资产特征。</p>
 </section>
-<section id="关键输出" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="关键输出"><span class="header-section-number">1.2</span> 关键输出</h2>
-<ul>
-<li>独立报告：<a href="report.html"><code>report.html</code></a></li>
-<li>描述统计：<code>output/descriptive_stats.csv</code></li>
-<li>CAPM 回归：<code>output/capm_results.csv</code></li>
-<li>图表文件：<code>output/fig1_normalized_prices.png</code> 至 <code>output/fig6_capm_beta.png</code></li>
-</ul>
-<p><img src="output/fig1_normalized_prices.png" class="img-fluid"></p>
+<section id="alpha-与解释力" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="alpha-与解释力"><span class="header-section-number">5.2</span> Alpha 与解释力</h2>
+<p>在 5% 显著性水平下，没有股票的 Alpha 显著异于 0，说明控制沪深 300 市场风险后，本样本未发现稳定、统计显著的日均超额收益。如果放宽到 10% 水平，比亚迪的 Alpha 接近显著，p 值约为 0.062，但这仍不能作为确定性超额收益结论。</p>
+<p>R² 最高的是五粮液，约 48.41%，贵州茅台约 43.16%，银行样本也在 36% 至 37% 左右，说明这些股票收益中有较大比例可由市场因子解释。R² 最低的是中国移动，约 4.54%；长江电力、中国石油等低 Beta 股票的 R² 也偏低，说明其收益更多受到公司特质、股息预期、能源价格或行业监管等非市场单因子影响。</p>
+</section>
+<section id="最终结论" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="最终结论"><span class="header-section-number">5.3</span> 最终结论</h2>
+<p>本项目完成了从数据获取、清洗、存储、合并到统计分析和 CAPM 回归的完整流程。结果显示，10 只股票并不是简单随市场同涨同跌，而是在收益、波动、最大回撤、ROE 和 Beta 暴露上呈现明显分层。比亚迪代表高成长、高波动样本；长江电力和中国移动更偏防御；贵州茅台体现高 ROE 和较强股价韧性；五粮液和平安银行在样本期内表现承压。</p>
+<p>CAPM 适合比较不同股票的系统性风险暴露，但对低 Beta、高股息或强公司特质股票的解释力有限。实际投资分析需要把市场风险因子、行业周期、公司盈利能力和宏观环境结合起来，而不能只依赖单一回归模型。</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -640,11 +599,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./analysis.html" class="pagination-link" aria-label="描述统计与可视化">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">描述统计与可视化</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./data.html" class="pagination-link" aria-label="数据获取">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">数据获取</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
