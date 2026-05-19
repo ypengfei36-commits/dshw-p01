@@ -6,7 +6,7 @@ project:
     - output/
 
 book:
-  title: "P01 金融数据获取、管理与初步分析"
+  title: "P02a 金融数据获取、管理与初步分析"
   author: "杨鹏飞"
   chapters:
     - index.qmd

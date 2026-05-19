@@ -46,9 +46,9 @@ def write_notebook(path: Path, cells: list) -> None:
 
 
 README = r"""
-# P01：金融数据获取、管理与初步分析
+# P02a：金融数据获取、管理与初步分析
 
-本项目完成 P01 金融数据作业：获取 A 股个股、市场指数、宏观经济指标和财务指标，完成数据清洗、存储格式对比、描述性统计、可视化、CAPM 回归，并导出独立 HTML 报告。
+本项目完成 P02a 金融数据作业：获取 A 股个股、市场指数、宏观经济指标和财务指标，完成数据清洗、存储格式对比、描述性统计、可视化、CAPM 回归，并导出独立 HTML 报告。
 
 > 说明：Notebook 默认使用 `akshare` 获取真实数据。如果当前网络或数据源接口临时失败，下载 Notebook 会生成带 `source=simulated_fallback` 标记的替代数据，以保证流程可复现；正式提交前建议在联网环境重新运行 `01_download.ipynb`，确认数据源为 `akshare`。
 
@@ -167,7 +167,7 @@ project:
   output-dir: docs
 
 book:
-  title: "P01 金融数据获取、管理与初步分析"
+  title: "P02a 金融数据获取、管理与初步分析"
   author: "请替换为你的姓名"
   chapters:
     - index.qmd
@@ -184,7 +184,7 @@ format:
 INDEX_QMD = r"""
 # 项目概览
 
-本电子书整理 P01 金融数据作业的主要流程和结论。完整代码见三个 Notebook，独立分析报告见 [`report.html`](report.html)。
+本电子书整理 P02a 金融数据作业的主要流程和结论。完整代码见三个 Notebook，独立分析报告见 [`report.html`](report.html)。
 
 ## 数据与方法
 
